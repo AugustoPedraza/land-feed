@@ -3,7 +3,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 // import gql from "graphql-tag";
 
-import ExchangeRates from './ExchangeRates';
+import Dogs from './Dogs';
 
 import logo from './logo.svg';
 import './App.css';
@@ -12,19 +12,8 @@ class App extends Component {
   render() {
 
   const client = new ApolloClient({
-    uri: "https://w5xlvm3vzz.lp.gql.zone/graphql"
+    uri: `https://nx9zvp49q7.lp.gql.zone/graphql`
   });
-// client
-//   .query({
-//     query: gql`
-//       {
-//         rates(currency: "USD") {
-//           currency
-//         }
-//       }
-//     `
-//   })
-//   .then(result => console.log(result));
 
     return (
       <ApolloProvider client={client}>
@@ -33,7 +22,7 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to My React</h1>
           </header>
-          <ExchangeRates />
+          <Dogs />
         </div>
       </ApolloProvider>
     );
