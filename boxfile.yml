@@ -10,7 +10,7 @@ run.config:
 
   # cache node_modules
   cache_dirs:
-    - node_modules
+    - frontend/land_feed/node_modules
 
   # add node_module bins to the $PATH
   extra_path_dirs:
