@@ -1,6 +1,8 @@
 import React from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
 
+import FeedList from './FeedList';
+
 const MainContainer = () => (
   <Segment basic>
     <Grid container columns='equal'>
@@ -8,7 +10,7 @@ const MainContainer = () => (
         <Segment>1</Segment>
       </Grid.Column>
       <Grid.Column width={10}>
-        <Segment>2</Segment>
+        <FeedList />
       </Grid.Column>
       <Grid.Column>
         <Segment>3</Segment>
