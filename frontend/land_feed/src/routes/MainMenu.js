@@ -10,7 +10,7 @@ export default class MainMenu extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu container icon='labeled'>
+      <Menu container='true' icon='labeled'>
         <Menu.Item name='newspaper' active={activeItem === 'newspaper'} onClick={this.handleItemClick}>
           <Icon name='newspaper' />
           Home

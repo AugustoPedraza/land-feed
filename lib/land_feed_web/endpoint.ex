@@ -35,6 +35,7 @@ defmodule LandFeedWeb.Endpoint do
     key: "_land_feed_key",
     signing_salt: "xmk3VVQu"
 
+  plug CORSPlug
   plug LandFeedWeb.Router
 
   @doc """

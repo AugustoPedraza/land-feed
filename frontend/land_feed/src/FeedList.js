@@ -1,39 +1,36 @@
 import React from 'react'
 import { Comment, Header } from 'semantic-ui-react'
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
+import Post from './Post';
+
+const GET_POSTS = gql`
+  query {
+    posts {
+      id
+      title
+      url
+    }
+  }
+`;
 
 const FeedList = () => (
-  <div>
-    <Comment.Group size='small'>
-      <Header as='h3' dividing>Lastest Posts</Header>
+  <Query query={GET_POSTS}>
+    {({ loading, error, data }) => {
+      if(loading) return <p>Loading .... </p>;
+      if(error) return <p>Error! ${error.message}</p>;
 
-      <Comment>
-        <Comment.Avatar as='a' src='https://react.semantic-ui.com/assets/images/avatar/small/matt.jpg' />
-        <Comment.Content>
-          <Comment.Author as='a'>Matt</Comment.Author>
-          <Comment.Metadata>
-            <span>Today at 5:42PM</span>
-          </Comment.Metadata>
-          <Comment.Text>How artistic!</Comment.Text>
-          <Comment.Actions>
-            <a>Reply</a>
-          </Comment.Actions>
-        </Comment.Content>
-      </Comment>
-      <Comment>
-        <Comment.Avatar as='a' src='https://react.semantic-ui.com/assets/images/avatar/small/joe.jpg' />
-        <Comment.Content>
-          <Comment.Author as='a'>Joe Henderson</Comment.Author>
-          <Comment.Metadata>
-            <span>5 days ago</span>
-          </Comment.Metadata>
-          <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
-          <Comment.Actions>
-            <a>Reply</a>
-          </Comment.Actions>
-        </Comment.Content>
-      </Comment>
-    </Comment.Group>
-  </div>
-)
+      return (
+        <Comment.Group size='small'>
+          <Header as='h3' dividing>Lastest Posts</Header>
+            {data.posts.map( post => (
+                <Post id={post.id} post={post} />
+            ))}
+        </Comment.Group>
+      );
+    }}
+  </Query>
+);
 
 export default FeedList;

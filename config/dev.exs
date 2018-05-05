@@ -44,3 +44,7 @@ config :land_feed, LandFeed.Repo,
   hostname: System.get_env("DATA_DB_HOST"),
   database: "land_feed_dev",
   pool_size: 10
+config :cors_plug,
+  origin: ["http://land-feed.local:3000"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
