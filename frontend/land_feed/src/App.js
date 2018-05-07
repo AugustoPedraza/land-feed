@@ -4,47 +4,29 @@ import {ApolloClient} from "apollo-client";
 import { ApolloProvider } from "react-apollo";
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { withClientState } from 'apollo-link-state';
+import { ApolloLink } from 'apollo-link';
 
-import MainContainer from './MainContainer';
-// import Dogs from './Dogs';
-// import DogPhoto from './DogPhoto';
+import MainMenu from './routes/MainMenu';
+import {defaults} from './resolvers';
 
-// import logo from './logo.svg';
-// import './App.css';
-//
+const cache = new InMemoryCache();//.restore(window.__APOLLO_STATE__);
+const httpLink = new HttpLink({ uri: process.env.REACT_APP_GQL_URI });
+const stateLink = withClientState({ defaults, cache });
+const link = ApolloLink.from([stateLink, httpLink]);
 
-const client = new ApolloClient({
-  link: new HttpLink({ uri: process.env.REACT_APP_GQL_URI }),
-  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
-});
+const client = new ApolloClient({ link, cache });
 
 class App extends Component {
-  // state = { selectedDog: null };
-
-  // onDogSelected = ({ target }) => {
-  //   this.setState(() => ({ selectedDog: target.value }));
-  // };
-
   render() {
     return (
       <ApolloProvider client={client}>
         <div>
+          <MainMenu />
           <Router />
-          <MainContainer />
         </div>
       </ApolloProvider>
     );
-    //     <div className="App">
-    //       <header className="App-header">
-    //         <img src={logo} className="App-logo" alt="logo" />
-    //         <h1 className="App-title">Welcome to My React</h1>
-    //       </header>
-		  // {this.state.selectedDog && (
-		    // <DogPhoto breed={this.state.selectedDog} />
-		  // )}
-    //       <Dogs onDogSelected={this.onDogSelected} />
-    //     </div>
-    // );
   }
 }
 

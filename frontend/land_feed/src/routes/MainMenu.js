@@ -1,22 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Icon, Menu } from 'semantic-ui-react'
+import { Query } from 'react-apollo';
+import {GET_ACTIVE_MENU} from '../queries';
 
-export default class MainMenu extends Component {
-  state = { activeItem: 'newspaper' }
+const MainMenu = () => (
+  <Query query={GET_ACTIVE_MENU}>
+    {({ data }) => {
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  render() {
-    const { activeItem } = this.state
-
-    return (
+      return (
       <Menu container='true' icon='labeled'>
-        <Menu.Item name='newspaper' active={activeItem === 'newspaper'} onClick={this.handleItemClick}>
-          <Icon name='newspaper' />
-          Home
-        </Menu.Item>
-      </Menu>
-    )
-  }
-}
+        <a href='/feed'>
+          <Menu.Item name='feed' active={data.activeMainMenu === 'feed'}>
+            <Icon name='newspaper' />
+            Home
+          </Menu.Item>
+        </a>
 
+        <a href='/setup'>
+          <Menu.Item name='setup' active={data.activeMainMenu === 'setup'}>
+            <Icon name='privacy' />
+            Setup
+          </Menu.Item>
+        </a>
+      </Menu>
+    )}}
+  </Query>
+);
+
+export default MainMenu;

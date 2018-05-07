@@ -6,12 +6,14 @@ import {
   // Link
 } from 'react-router-dom'
 
-import MainMenu from './routes/MainMenu';
+import FeedContainer from './FeedContainer';
+import SetupContainer from './SetupContainer';
 
 const Router = () => (
   <BrowserRouter>
     <div>
-      <Route exact path="/feed" component={MainMenu}/>
+      <Route exact path="/feed" component={FeedContainer}/>
+      <Route exact path="/setup" component={SetupContainer}/>
       <Route exact path="/" render={() => ( <Redirect to="/feed"/> )} />
     </div>
   </BrowserRouter>

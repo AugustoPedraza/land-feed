@@ -3,7 +3,7 @@ import { Grid, Segment } from 'semantic-ui-react'
 
 import FeedList from './FeedList';
 
-const MainContainer = () => (
+const FeedContainer = () => (
   <Segment basic>
     <Grid container columns='equal'>
       <Grid.Column>
@@ -19,4 +19,4 @@ const MainContainer = () => (
   </Segment>
 )
 
-export default MainContainer;
+export default FeedContainer;
